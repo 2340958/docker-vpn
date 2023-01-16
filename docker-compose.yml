@@ -1,0 +1,17 @@
+version: "3"
+services:
+  gluetun:
+    image: qmcgaw/gluetun
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - VPN_SERVICE_PROVIDER=nordvpn
+      - VPN_TYPE=openvpn
+      - OPENVPN_USER=YourUser
+      - OPENVPN_PASSWORD=YourPassword
+      - SERVER_REGIONS=Netherlands
+  curl:
+    image: curlimages/curl
+    network_mode: "service:gluetun" 
+
+# run docker-compose run --rm curl ifconfig.me to check :)    
